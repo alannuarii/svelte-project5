@@ -1,6 +1,7 @@
 <script>
-	import { enhance } from '$app/forms';
 	import { timeRemining } from '../../lib/js/timeConfig';
+	import ModalDeleteUser from '$lib/components/ModalDeleteUser.svelte';
+
 	export let data;
 	export let form;
 	const users = data.users;
@@ -40,14 +41,16 @@
 					<div class="card card-body">
 						<div class="d-flex justify-content-evenly">
 							<a href="/update/{user.id}" class="btn btn-sm btn-secondary w-25">Edit</a>
-							<form method="post" action="?/delete" use:enhance class="w-25">
-								<input type="hidden" name="id" value={user.id} />
-								<button class="btn btn-sm btn-danger">Delete</button>
-							</form>
+							<button
+								class="btn btn-sm btn-danger"
+								data-bs-toggle="modal"
+								data-bs-target="#Modal{user.id}">Delete</button
+							>
 						</div>
 					</div>
 				</div>
 			</div>
+			<ModalDeleteUser id={user.id} name={user.name} />
 		{/each}
 	{:else}
 		<p>No users found.</p>

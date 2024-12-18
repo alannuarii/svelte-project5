@@ -17,10 +17,10 @@ export const actions = {
             await db.insert(table.user).values({ id: userId, name, role, pin, expiresAt: expires });
 
             return {
-                message: 'Data saved successfully'
+                message: 'Data updated successfully', status: 'OK'
             };
         } catch (e) {
-            return fail(500, { message: e.message });
+            return fail(500, { message: e.message, status: 'Not OK' });
         }
     }
 };

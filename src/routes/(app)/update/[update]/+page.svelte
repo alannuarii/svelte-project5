@@ -1,32 +1,18 @@
 <script>
 	import { enhance } from '$app/forms';
-	import { onMount } from 'svelte';
-	import { goto } from '$app/navigation';
+	import Alert from '$lib/components/Alert.svelte';
 	import { timeRemining, convertDateTime } from '../../../../lib/js/timeConfig';
 
 	export let data;
 	export let form;
 
 	const user = data.user;
-
-	onMount(() => {
-		if (form?.message === 'Data updated successfully') {
-			setTimeout(() => {
-				goto('/');
-			}, 3000);
-		}
-	});
 </script>
 
 <section>
 	<div class="card mx-3 p-3">
 		<div class="mb-3"><h4 class="text-center fw-bold">REGISTRATION</h4></div>
-		{#if form?.message}
-			<!-- Gunakan optional chaining -->
-			<div class="alert alert-success" role="alert">
-				{form.message}
-			</div>
-		{/if}
+		<Alert {form} />
 		<form method="post" action="?/update">
 			<div class="px-2 mb-3">
 				<div class="form-floating mb-3">

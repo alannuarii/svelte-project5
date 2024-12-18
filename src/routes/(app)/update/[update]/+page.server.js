@@ -36,10 +36,10 @@ export const actions = {
             await db.update(table.user).set({ name, role, pin, expiresAt: expires }).where(eq(table.user.id, id));
 
             return {
-                message: 'Data updated successfully'
+                message: 'Data updated successfully', status: 'OK'
             };
         } catch (e) {
-            return fail(500, { message: e.message });
+            return fail(500, { message: e.message, status: 'Not OK' });
         }
     }
 };
